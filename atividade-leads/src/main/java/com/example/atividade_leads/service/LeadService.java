@@ -4,6 +4,7 @@ import com.example.atividade_leads.domain.Lead;
 import com.example.atividade_leads.repository.LeadRepository;
 import com.example.atividade_leads.dto.LeadRequest;
 import com.example.atividade_leads.dto.LeadResponse;
+import org.springframework.data.jdbc.core.JdbcAggregateOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,10 +17,12 @@ import java.util.stream.Collectors;
 public class LeadService {
 
     private final LeadRepository repository;
+    private final JdbcAggregateOperations aggregateOperations;
     private final ClassificationService classifier;
 
-    public LeadService(LeadRepository repository, ClassificationService classifier) {
+    public LeadService(LeadRepository repository, JdbcAggregateOperations aggregateOperations, ClassificationService classifier) {
         this.repository = repository;
+        this.aggregateOperations = aggregateOperations;
         this.classifier = classifier;
     }
 
@@ -40,7 +43,7 @@ public class LeadService {
                 result.sugestao()
         );
 
-        Lead saved = repository.save(lead);
+        Lead saved = aggregateOperations.insert(lead);
 
         return toDto(saved);
     }
