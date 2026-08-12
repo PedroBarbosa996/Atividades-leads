@@ -1,0 +1,31 @@
+meta {
+  name: Create Lead
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/leads
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Joao da Silva",
+    "email": "joao.silva@example.com",
+    "telefone": "11999998888",
+    "cpf": "12345678900",
+    "consumoMedio": 450.0
+  }
+}
+
+script:post-response {
+  if (res.body && res.body.id) {
+    bru.setVar("leadId", res.body.id);
+  }
+}
