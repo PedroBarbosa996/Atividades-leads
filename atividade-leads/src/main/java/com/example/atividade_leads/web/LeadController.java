@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/leads")
+@CrossOrigin(origins = "*")
 public class LeadController {
 
     private final LeadService service;
@@ -28,5 +29,11 @@ public class LeadController {
     @GetMapping
     public List<LeadResponse> list() {
         return service.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LeadResponse> getById(@PathVariable("id") java.util.UUID id) {
+        LeadResponse resp = service.getById(id);
+        return ResponseEntity.ok(resp);
     }
 }

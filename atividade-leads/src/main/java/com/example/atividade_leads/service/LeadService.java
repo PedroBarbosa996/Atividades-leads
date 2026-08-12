@@ -49,6 +49,11 @@ public class LeadService {
         return ((List<Lead>) repository.findAll()).stream().map(this::toDto).collect(Collectors.toList());
     }
 
+    public LeadResponse getById(UUID id) {
+        return repository.findById(id).map(this::toDto)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lead não encontrado"));
+    }
+
     private LeadResponse toDto(Lead l) {
         return new LeadResponse(
                 l.getId(), l.getNome(), l.getEmail(), l.getTelefone(), l.getCpf(), l.getConsumoMedio(), l.getFaixa(), l.getPrioridade(), l.getSugestao()
