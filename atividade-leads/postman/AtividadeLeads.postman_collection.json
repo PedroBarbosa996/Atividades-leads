@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "Atividade Leads API",
+    "_postman_id": "atividade-leads-collection",
+    "description": "Collection para testar os endpoints da API de Leads",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        }
+      }
+    },
+    {
+      "name": "Create Lead",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Teste Medio\",\n  \"email\": \"medio@example.com\",\n  \"telefone\": \"11900000001\",\n  \"cpf\": \"22233344455\",\n  \"consumoMedio\": 150\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/leads",
+          "host": ["{{baseUrl}}"],
+          "path": ["leads"]
+        }
+      }
+    },
+    {
+      "name": "List Leads",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/leads",
+          "host": ["{{baseUrl}}"],
+          "path": ["leads"]
+        }
+      }
+    },
+    {
+      "name": "Get Lead by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/leads/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["leads", ":id"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

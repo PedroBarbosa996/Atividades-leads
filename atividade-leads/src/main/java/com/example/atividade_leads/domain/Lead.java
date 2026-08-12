@@ -9,18 +9,32 @@ import java.util.UUID;
 @Table("lead")
 public class Lead {
 
+    @Column("id")
     @Id
     private UUID id;
+
+    @Column("nome")
     private String nome;
+
+    @Column("email")
     private String email;
+
+    @Column("telefone")
     private String telefone;
+
+    @Column("cpf")
     private String cpf;
 
     @Column("consumo_medio")
     private Double consumoMedio;
 
+    @Column("faixa")
     private String faixa;
+
+    @Column("prioridade")
     private Integer prioridade;
+
+    @Column("sugestao")
     private String sugestao;
 
     public Lead() {
